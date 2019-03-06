@@ -74,15 +74,15 @@ public class InstructionOccurrenceCounter {
 				}
 			}
 		}
-        List<Entry<String, Long>> list = new ArrayList<Entry<String, Long>>();
-        list.addAll(tmpTables.entrySet());
-        list.sort(Entry.comparingByValue());
-        Collections.reverse(list);
-        assert(instructionTuples.isEmpty());
-        
-        for(Entry<String, Long> e : list) {
-        	instructionTuples.put(e.getKey(), e.getValue());
-        }
+		List<Entry<String, Long>> list = new ArrayList<Entry<String, Long>>();
+		list.addAll(tmpTables.entrySet());
+		list.sort(Entry.comparingByValue());
+		Collections.reverse(list);
+		assert(instructionTuples.isEmpty());
+
+		for(Entry<String, Long> e : list) {
+			instructionTuples.put(e.getKey(), e.getValue());
+		}
 	}
 	
 	public String toString() {
