@@ -5,7 +5,7 @@ JAVA library (with maven support) for parsing SMDA disassembly reports
 You can use this project to parse SMDA disassembly reports (https://github.com/danielplohmann/smda).
 Those disassembly reports are processed as SMDA objects. It saves you the time to write a json parser for the complex structure, for example gson (Google JSON JAVA library) cannot simply interpret the function graph.
 
-PLUS: This projects generates Ngrams for you from the instructions. It reads all instructions that follow each other into a fixed sized Ngram and skips code caves (but it does not continue, it breaks at code caves and starts new Ngrams, since you usually do not want to build a code cave over a uncertain amount of e.g. padding bytes).
+PLUS: This projects can generate Ngrams for you from the instructions in the smda reports. It reads all instructions that follow each other into a fixed sized Ngram and skips code caves (but it does not continue, it breaks at code caves and starts new Ngrams, since you usually do not want to build a code cave over a uncertain amount of e.g. padding bytes).
 
 ### What dependencies does it use?
 It uses gson. The rest is basically standard stuff. See the pom.xml file to see the details.
