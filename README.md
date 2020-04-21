@@ -1,5 +1,16 @@
 # smda-reader
-JAVA library (with maven support) for parsing SMDA disassembly reports
+
+JAVA library (with maven support) for parsing SMDA disassembly reports.
+
+Version 0.3.x is supposed to work with YARA-Signator >= 0.3 and with smda reports in version 1.0.3.
+
+### SMDA Version
+
+This software has been tested to work with [smda](https://github.com/danielplohmann/smda) disassembly report format 1.0.3 (commit 1f129bed from github, March 2020).
+
+### Unit Tests
+
+The Unit Tests are developed against SMDA reports for format 1.0.3. This is only a safety measure as long as you operate on smda disassembly reports in format 1.0.3. It is possible that new versions break the format and therefore might not be directly supported (although we keep smda-reader up-to-date against future smda releases).
 
 ### What does it do?
 You can use this project to parse SMDA disassembly reports (https://github.com/danielplohmann/smda).
@@ -16,7 +27,7 @@ You can easily integrate this repository into your codebase using maven:
 git clone https://github.com/fxb-cocacoding/smda-reader.git
 cd smda-reader
 mvn package
-mvn install:install-file -Dfile=target/smda-reader-0.0.1-SNAPSHOT.jar -DpomFile=pom.xml
+mvn install:install-file -Dfile=target/smda-reader-0.3.0-SNAPSHOT.jar -DpomFile=pom.xml
 ```
 Then add the project to your maven repository (the `<dependencies>`-section of your pom.xml) using the following statement:
 ```
@@ -24,7 +35,7 @@ Then add the project to your maven repository (the `<dependencies>`-section of y
     <dependency>
       <groupId>com.cocacoding</groupId>
       <artifactId>smda-reader</artifactId>
-      <version>0.0.1-SNAPSHOT</version>
+      <version>0.3.0-SNAPSHOT</version>
     </dependency>
 ```
   

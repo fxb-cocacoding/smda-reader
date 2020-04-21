@@ -3,35 +3,48 @@ package converters.ngrams;
 import java.util.ArrayList;
 import java.util.List;
 
+import converters.linearization.Linearization;
 import smtx_handler.Instruction;
 import smtx_handler.SMDA;
 
 public class NgramGenerator {
 		
 	public List<Ngram> createWithoutOverlappingCodeCavesUsingFunctions(SMDA smda) {
-		ArrayList<Ngram> allNgrams = new ArrayList<>();
+		//ArrayList<Ngram> allNgrams = new ArrayList<>();
 		
 		/*
 		 * Currently unimplemented, use createWithoutOverlappingCodeCaves
 		 */
 		
-		return allNgrams;
+		throw new UnsupportedOperationException();
+		
+		//return allNgrams;
 	}
 	
-	public List<Ngram> createWithoutOverlappingCodeCaves(List<List<Instruction>> linearizedDisassembly, int n) {
-		ArrayList<Ngram> allNgrams = new ArrayList<>();
+	public List<Ngram> createWithoutOverlappingCodeCaves(Linearization linearizedDisassembly, int n) {
+		ArrayList<Ngram> allNgrams = new ArrayList<>(linearizedDisassembly.getLinearization().size());
+		long begin = linearizedDisassembly.getSortedSMDA().getBase_addr();
+		if(begin < 0x100000) {
+			begin = begin + 0x100000;
+		}
+		long end = begin + linearizedDisassembly.getSortedSMDA().getBuffer_size();
 		
-		for(List<Instruction> instructionList : linearizedDisassembly) {
+		for(List<Instruction> instructionList : linearizedDisassembly.getLinearization()) {
+			
 			for(int i=0; i<instructionList.size(); i++) {
 				
 				if(i+n < instructionList.size()) {
 					Ngram ngram = new Ngram(n);
+					ngram.lowerAddressLimit = begin;
+					ngram.higherAddressLimit = end;
 					for(int j=i; j<i+n; j++) {
 						ngram.ngramInstructions.add(instructionList.get(j));
 					}
 					allNgrams.add(ngram);
 				}
+				
 			}
+			
 		}
 		
 		return allNgrams;
@@ -41,10 +54,10 @@ public class NgramGenerator {
 	 * Currently unimplemented, since we never needed that, there is no real use-case for this.
 	 */
 	public List<Ngram> createWithOverlappingCodeCaves(List<List<Instruction>> linearizedDisassembly) {
-		ArrayList<Ngram> allNgrams = new ArrayList<>();
+		//ArrayList<Ngram> allNgrams = new ArrayList<>();
 		
-		if(1==1) throw new UnsupportedOperationException();
+		throw new UnsupportedOperationException();
 		
-		return allNgrams;
+		//return allNgrams;
 	}
 }

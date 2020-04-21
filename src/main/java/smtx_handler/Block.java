@@ -1,7 +1,6 @@
 package smtx_handler;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 
 public class Block implements Serializable {

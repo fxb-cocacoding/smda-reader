@@ -24,4 +24,9 @@ public class Meta {
 	public void setMalpedia_filepath(String malpedia_filepath) {
 		this.malpedia_filepath = malpedia_filepath;
 	}
+	
+	@Override
+	public String toString() {
+		return "Meta [family=" + family + ", malpedia_filepath=" + malpedia_filepath + ", message=" + message + "]";
+	}
 }

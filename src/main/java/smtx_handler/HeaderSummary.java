@@ -26,7 +26,8 @@ public class HeaderSummary implements Serializable {
 	private static final long serialVersionUID = 358546885617036383L;
 	private long num_api_calls;
 	private long num_basic_blocks;
-	private long num_disassembly_errors;
+	private long num_disassembly_failed_functions;
+	private long num_disassembly_failed_instructions;
 	private long num_function_calls;
 	private long num_functions;
 	private long num_instructions;
@@ -49,15 +50,7 @@ public class HeaderSummary implements Serializable {
 	public void setNum_basic_blocks(long num_basic_blocks) {
 		this.num_basic_blocks = num_basic_blocks;
 	}
-	
-	public long getNum_disassembly_errors() {
-		return num_disassembly_errors;
-	}
-	
-	public void setNum_disassembly_errors(long num_disassembly_errors) {
-		this.num_disassembly_errors = num_disassembly_errors;
-	}
-	
+		
 	public long getNum_function_calls() {
 		return num_function_calls;
 	}
@@ -105,10 +98,27 @@ public class HeaderSummary implements Serializable {
 	@Override
 	public String toString() {
 		return "HeaderSummary [num_api_calls=" + num_api_calls + ", num_basic_blocks=" + num_basic_blocks
-				+ ", num_disassembly_errors=" + num_disassembly_errors + ", num_function_calls=" + num_function_calls
-				+ ", num_functions=" + num_functions + ", num_instructions=" + num_instructions
-				+ ", num_leaf_functions=" + num_leaf_functions + ", num_recursive_functions=" + num_recursive_functions
-				+ "]";
+				+ ", num_disassembly_failed_functions=" + num_disassembly_failed_functions
+				+ ", num_disassembly_failed_instructions=" + num_disassembly_failed_instructions
+				+ ", num_function_calls=" + num_function_calls + ", num_functions=" + num_functions
+				+ ", num_instructions=" + num_instructions + ", num_leaf_functions=" + num_leaf_functions
+				+ ", num_recursive_functions=" + num_recursive_functions + "]";
+	}
+
+	public long getNum_disassembly_failed_functions() {
+		return num_disassembly_failed_functions;
+	}
+
+	public void setNum_disassembly_failed_functions(long num_disassembly_failed_functions) {
+		this.num_disassembly_failed_functions = num_disassembly_failed_functions;
+	}
+
+	public long getNum_disassembly_failed_instructions() {
+		return num_disassembly_failed_instructions;
+	}
+
+	public void setNum_disassembly_failed_instructions(long num_disassembly_failed_instructions) {
+		this.num_disassembly_failed_instructions = num_disassembly_failed_instructions;
 	}
 	
 	

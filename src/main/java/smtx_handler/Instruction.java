@@ -1,7 +1,6 @@
 package smtx_handler;
 
 import java.io.Serializable;
-import java.util.Collection;
 import java.util.List;
 
 public class Instruction implements Serializable {
@@ -14,6 +13,36 @@ public class Instruction implements Serializable {
 	private long offset;
 	private String opcodes;
 	private List<String> mnemonics;
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((opcodes == null) ? 0 : opcodes.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Instruction)) {
+			return false;
+		}
+		Instruction other = (Instruction) obj;
+		if (opcodes == null) {
+			if (other.opcodes != null) {
+				return false;
+			}
+		} else if (!opcodes.equals(other.opcodes)) {
+			return false;
+		}
+		return true;
+	}
 	
 	
 	public long getOffset() {
@@ -39,15 +68,6 @@ public class Instruction implements Serializable {
 		return opcodes.length()/2;
 	}
 	
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		//result = prime * result + ((mnemonics == null) ? 0 : mnemonics.hashCode());
-		//result = prime * result + (int) (offset ^ (offset >>> 32));
-		result = prime * result + ((opcodes == null) ? 0 : opcodes.hashCode());
-		return result;
-	}
 	
 	/*
 	 * real equals
@@ -80,24 +100,6 @@ public class Instruction implements Serializable {
 	
 	
 	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Instruction other = (Instruction) obj;
-		if (opcodes == null) {
-			if (other.opcodes != null)
-				return false;
-		} else if (!opcodes.equals(other.opcodes))
-			return false;
-		return true;
-	}
-
-	
-	@Override
 	public String toString() {
 		return "    Instruction [offset=" + offset + ", opcodes=" + opcodes + ", mnemonics=" + mnemonics + "]";
 	}
@@ -114,4 +116,5 @@ public class Instruction implements Serializable {
 		}
 		return sb.toString();
 	}
+	
 }

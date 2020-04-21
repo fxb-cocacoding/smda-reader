@@ -3,12 +3,20 @@ package smtx_handler;
 import java.io.Serializable;
 import java.util.Collections;
 
+/** SMDA class for smda disasembly reports.
+ * 
+ * @author Felix Bilstein
+ * @author yara-signator (at) cocacoding (dot) com
+ * @version 0.1
+ * @since 0.1
+*/
 public class SMDA implements Serializable {
 	private static final long serialVersionUID = 7647370162184479335L;
 
 	private String architecture;
 	private long base_addr;
 	private long bitness;
+	private long buffer_size;
 	private float execution_time;
 	private String family;
 	private String filename;
@@ -17,7 +25,7 @@ public class SMDA implements Serializable {
 	private String smtx_version;
 	private String status;
 	private HeaderSummary summary;
-	private Meta meta;
+	private Meta metadata;
 	
 	private String timestamp;
 	private FunctionGraph xcfg;
@@ -146,19 +154,29 @@ public class SMDA implements Serializable {
 	@Override
 	public String toString() {
 		return "SMDA [architecture=" + architecture + ", base_addr=" + base_addr + ", bitness=" + bitness
-				+ ", execution_time=" + execution_time + ", family=" + family + ", filename=" + filename + ", message="
-				+ message + ", sha256=" + sha256 + ", smtx_version=" + smtx_version + ", status=" + status
-				+ ", summary=" + summary + ", timestamp=" + timestamp + "]"
+				+ ", buffer_size=" + buffer_size + ", execution_time=" + execution_time + ", family=" + family
+				+ ", filename=" + filename + ", message=" + message + ", sha256=" + sha256 + ", smtx_version="
+				+ smtx_version + ", status=" + status + ", summary=" + summary + ", metadata=" + metadata
+				+ ", timestamp=" + timestamp + "]"
 				+ "\n\nPages: "
 				+ xcfg.toString();
+
 	}
 
 	public Meta getMeta() {
-		return meta;
+		return metadata;
 	}
 
 	public void setMeta(Meta meta) {
-		this.meta = meta;
+		this.metadata = meta;
+	}
+
+	public long getBuffer_size() {
+		return buffer_size;
+	}
+
+	public void setBuffer_size(long buffer_size) {
+		this.buffer_size = buffer_size;
 	}
 	
 	

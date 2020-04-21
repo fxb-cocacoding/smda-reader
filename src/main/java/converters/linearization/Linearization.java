@@ -12,15 +12,32 @@ public class Linearization {
 	 */
 	
 	private SMDA sortedSMDA;
+	private List<List<Instruction>> linearization;
 	
 	public Linearization(SMDA smda) {
 		this.sortedSMDA = smda;
 	}
 	
-	public List<List<Instruction>> linearize() {
+	public void linearize() {
 		sortedSMDA.sort();
 		BlockCandidateIdentifier ident = new BlockCandidateIdentifier(this.sortedSMDA);
-		return ident.getOrderedInstructionList();
+		linearization = ident.getOrderedInstructionList();
+	}
+
+	public List<List<Instruction>> getLinearization() {
+		return linearization;
+	}
+
+	public void setLinearization(List<List<Instruction>> linearization) {
+		this.linearization = linearization;
 	}
 	
+	public SMDA getSortedSMDA() {
+		return sortedSMDA;
+	}
+
+	public void setSortedSMDA(SMDA sortedSMDA) {
+		this.sortedSMDA = sortedSMDA;
+	}
+
 }
