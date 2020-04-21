@@ -26,13 +26,14 @@ public class WinCitadel_d147e69bd47cd504ca555fcad15081ac5bd79b584794a93d5b250eb7
 	 */
 	
 	final static String filename = "src/test/resources/smda_samples/win.citadel/d147e69bd47cd504ca555fcad15081ac5bd79b584794a93d5b250eb73d05b186_dump_0x02390000.smda";
-	final static long	num_api_calls = 1033,
-	  					num_basic_blocks = 9240,
-	  					num_disassembly_errors = 34,
-	  					num_function_calls = 3411,
+	final static long	num_api_calls = 0,
+	  					num_basic_blocks = 9243,
+	  					num_disassembly_failed_functions = 19,
+	  					num_disassembly_failed_instructions = 0,
+	  					num_function_calls = 3414,
 	  					num_functions = 780,
 	  					num_instructions = 46305,
-	  					num_leaf_functions = 99,
+	  					num_leaf_functions = 102,
 	  					num_recursive_functions = 6;
 	
 	SMDA smda = null;
