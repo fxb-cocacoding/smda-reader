@@ -3,6 +3,8 @@ package smtx_handler;
 import java.io.Serializable;
 import java.util.List;
 
+import org.checkerframework.checker.signedness.qual.Unsigned;
+
 public class Instruction implements Serializable {
 	/*
 	 * This is the class containing one block of the json disassembly file
@@ -10,10 +12,15 @@ public class Instruction implements Serializable {
 	 */
 
 	private static final long serialVersionUID = 8011492919947143599L;
+	
+	@Unsigned
 	private long offset;
+	
 	private String opcodes;
 	private List<String> mnemonics;
 
+	
+	/* Only opcodes are relevant for us*/
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -22,6 +29,7 @@ public class Instruction implements Serializable {
 		return result;
 	}
 
+	/* Only opcodes are relevant for us*/
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
@@ -101,12 +109,12 @@ public class Instruction implements Serializable {
 	
 	@Override
 	public String toString() {
-		return "    Instruction [offset=" + offset + ", opcodes=" + opcodes + ", mnemonics=" + mnemonics + "]";
+		return "    Instruction [offset=" + Long.toUnsignedString(this.offset) + ", opcodes=" + opcodes + ", mnemonics=" + mnemonics + "]";
 	}
 	
 	public String toStringInDisassemblyView() {
 		StringBuilder sb = new StringBuilder();
-		sb.append(this.offset);
+		sb.append(Long.toUnsignedString(this.offset));
 		sb.append("    ");
 		sb.append(this.opcodes);
 		sb.append("    ");

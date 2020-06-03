@@ -8,6 +8,10 @@ import java.io.IOException;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import smtx_handler.CodeAreas;
+import smtx_handler.CodeAreasDeserializer;
+import smtx_handler.DisassemblyErrors;
+import smtx_handler.DisassemblyErrorsDeserializer;
 import smtx_handler.FunctionGraph;
 import smtx_handler.FunctionGraphDeserializer;
 import smtx_handler.SMDA;
@@ -19,6 +23,8 @@ public class TestingTemplates {
 
 		GsonBuilder gsonBuilder = new GsonBuilder();
 		gsonBuilder.registerTypeAdapter(FunctionGraph.class, new FunctionGraphDeserializer());
+		gsonBuilder.registerTypeAdapter(CodeAreas.class, new CodeAreasDeserializer());
+		gsonBuilder.registerTypeAdapter(DisassemblyErrors.class, new DisassemblyErrorsDeserializer());
 		Gson gson = gsonBuilder.create();
 
 		SMDA smda = gson.fromJson(br, SMDA.class);

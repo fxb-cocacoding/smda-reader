@@ -27,13 +27,13 @@ public class WinCitadel_0e967868c1f693097857d6d1069a3efca1e50f4516bb2637a10761d9
 	
 	final static String filename = "src/test/resources/smda_samples/win.citadel/0e967868c1f693097857d6d1069a3efca1e50f4516bb2637a10761d9bf4992ff_dump_0x02390000.smda";
 	final static long	num_api_calls=0, 
-			  			num_basic_blocks=10229,
-			  			num_disassembly_failed_functions=42,
+			  			num_basic_blocks=10254,
+			  			num_disassembly_failed_functions=58,
 			  			num_disassembly_failed_instructions=0,
-			  			num_function_calls=3780,
-			  			num_functions=845,
-			  			num_instructions=51088,
-			  			num_leaf_functions=110,
+			  			num_function_calls=3778,
+			  			num_functions=852,
+			  			num_instructions=51231,
+			  			num_leaf_functions=113,
 			  			num_recursive_functions=7;
 	
 	SMDA smda = null;
@@ -55,7 +55,7 @@ public class WinCitadel_0e967868c1f693097857d6d1069a3efca1e50f4516bb2637a10761d9
 		for(Function a : smda.getXcfg().getFunctions()) {
 			all += a.getApirefs().size();
 		}
-		assertEquals(num_api_calls, smda.getSummary().getNum_api_calls());
+		assertEquals(num_api_calls, smda.getStatistics().getNum_api_calls());
 		assertEquals(num_api_calls, all);
 	}
 	
@@ -65,7 +65,7 @@ public class WinCitadel_0e967868c1f693097857d6d1069a3efca1e50f4516bb2637a10761d9
 		for(Function a : smda.getXcfg().getFunctions()) {
 			all += a.getBlocks().size();
 		}
-		assertEquals(num_basic_blocks, smda.getSummary().getNum_basic_blocks());
+		assertEquals(num_basic_blocks, smda.getStatistics().getNum_basic_blocks());
 		assertEquals(num_basic_blocks, all);
 	}
 	
@@ -75,7 +75,7 @@ public class WinCitadel_0e967868c1f693097857d6d1069a3efca1e50f4516bb2637a10761d9
 		for(Function a : smda.getXcfg().getFunctions()) {
 			all += a.getInrefs().size();
 		}
-		assertEquals(num_function_calls, smda.getSummary().getNum_function_calls());
+		assertEquals(num_function_calls, smda.getStatistics().getNum_function_calls());
 		assertEquals(num_function_calls, all);
 	}
 	
@@ -94,7 +94,7 @@ public class WinCitadel_0e967868c1f693097857d6d1069a3efca1e50f4516bb2637a10761d9
 				all += blocks.getInstructions().size();
 			}
 		}
-		assertEquals(num_instructions, smda.getSummary().getNum_instructions());
+		assertEquals(num_instructions, smda.getStatistics().getNum_instructions());
 		assertEquals(num_instructions, all);
 	}
 }

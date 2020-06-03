@@ -28,13 +28,13 @@ public class WinCitadel_fcc8370fcb067bbb5bc17c513febdb13686f7a7c1b3df99d2be6e573
 	
 	final static String filename = "src/test/resources/smda_samples/win.citadel/fcc8370fcb067bbb5bc17c513febdb13686f7a7c1b3df99d2be6e573017df0e6_dump_0x02390000.smda";
 	final static long	  num_api_calls = 0,
-						  num_basic_blocks = 10666,
-						  num_disassembly_failed_functions = 55,
+						  num_basic_blocks = 10667,
+						  num_disassembly_failed_functions = 73,
 						  num_disassembly_failed_instructions = 0,
-						  num_function_calls = 3974,
-						  num_functions = 871,
-						  num_instructions = 53291,
-						  num_leaf_functions = 113,
+						  num_function_calls = 3972,
+						  num_functions = 873,
+						  num_instructions = 53318,
+						  num_leaf_functions = 112,
 						  num_recursive_functions = 7;
 
 	
@@ -57,7 +57,7 @@ public class WinCitadel_fcc8370fcb067bbb5bc17c513febdb13686f7a7c1b3df99d2be6e573
 		for(Function a : smda.getXcfg().getFunctions()) {
 			all += a.getApirefs().size();
 		}
-		assertEquals(num_api_calls, smda.getSummary().getNum_api_calls());
+		assertEquals(num_api_calls, smda.getStatistics().getNum_api_calls());
 		assertEquals(num_api_calls, all);
 	}
 	
@@ -67,7 +67,7 @@ public class WinCitadel_fcc8370fcb067bbb5bc17c513febdb13686f7a7c1b3df99d2be6e573
 		for(Function a : smda.getXcfg().getFunctions()) {
 			all += a.getBlocks().size();
 		}
-		assertEquals(num_basic_blocks, smda.getSummary().getNum_basic_blocks());
+		assertEquals(num_basic_blocks, smda.getStatistics().getNum_basic_blocks());
 		assertEquals(num_basic_blocks, all);
 	}
 	
@@ -77,7 +77,7 @@ public class WinCitadel_fcc8370fcb067bbb5bc17c513febdb13686f7a7c1b3df99d2be6e573
 		for(Function a : smda.getXcfg().getFunctions()) {
 			all += a.getInrefs().size();
 		}
-		assertEquals(num_function_calls, smda.getSummary().getNum_function_calls());
+		assertEquals(num_function_calls, smda.getStatistics().getNum_function_calls());
 		assertEquals(num_function_calls, all);
 	}
 	
@@ -96,7 +96,7 @@ public class WinCitadel_fcc8370fcb067bbb5bc17c513febdb13686f7a7c1b3df99d2be6e573
 				all += blocks.getInstructions().size();
 			}
 		}
-		assertEquals(num_instructions, smda.getSummary().getNum_instructions());
+		assertEquals(num_instructions, smda.getStatistics().getNum_instructions());
 		assertEquals(num_instructions, all);
 	}
 }

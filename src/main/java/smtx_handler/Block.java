@@ -2,6 +2,7 @@ package smtx_handler;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 
 public class Block implements Serializable {
 
@@ -29,4 +30,24 @@ public class Block implements Serializable {
 	public String toString() {
 		return "    Block [instructions=    " + instructions.toString() + "    blockOffset=" + blockOffset + "]";
 	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(blockOffset, instructions);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof Block)) {
+			return false;
+		}
+		Block other = (Block) obj;
+		return Objects.equals(blockOffset, other.blockOffset) && Objects.equals(instructions, other.instructions);
+	}
+	
+	
 }

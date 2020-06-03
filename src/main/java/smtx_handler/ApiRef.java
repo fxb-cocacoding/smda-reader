@@ -1,6 +1,7 @@
 package smtx_handler;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class ApiRef implements Serializable {
 	private static final long serialVersionUID = 6028813804011975877L;
@@ -29,5 +30,25 @@ public class ApiRef implements Serializable {
 	@Override
 	public String toString() {
 		return " ApiRef [offset=" + offset + ", apicall=" + apicall + "] ";
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(apicall, offset);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) {
+			return true;
+		}
+		if (obj == null) {
+			return false;
+		}
+		if (!(obj instanceof ApiRef)) {
+			return false;
+		}
+		ApiRef other = (ApiRef) obj;
+		return Objects.equals(apicall, other.apicall) && offset == other.offset;
 	}
 }

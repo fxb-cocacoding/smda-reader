@@ -16,15 +16,12 @@ public class FunctionGraphDeserializer implements JsonDeserializer<FunctionGraph
 
 	@Override
 	public FunctionGraph deserialize(JsonElement json, Type arg1, JsonDeserializationContext arg2) throws JsonParseException {
+		
 		FunctionGraph functionGraph = new FunctionGraph();
 		functionGraph.setFunctions(new ArrayList<>());
 		
 		JsonObject jsonObject = json.getAsJsonObject();
-
-		//System.out.println(jsonObject.toString());
-
 		JsonObject elem = jsonObject.getAsJsonObject();
-		//System.out.println("\n" + elem.toString());
 		
         Set<Entry<String, JsonElement>> objects =  elem.entrySet();
 		
@@ -34,15 +31,23 @@ public class FunctionGraphDeserializer implements JsonDeserializer<FunctionGraph
          * 
          * One Page contains these entries:
          * 
-         * 1 private int start_address;
+         * 1 private long start_address;
 		 * 2 private Collection<ApiRef> apirefs;
 		 * 3 private Collection<BlockRef> blockrefs;
 		 * 4 private Collection<Blocks> blocks;
 		 * 5 private Collection<InRef> inrefs;
-		 * 6 private int offset;
-		 * 7 private Collection<OutRefs> outref;
+		 * 
+		 * NEW in smda 1.2.4
+		 * 
+		 * 5.1 private FunctionMetaData metadata;
+		 * 
+		 * END NEW
+		 * 
+		 * 6 private long offset;
+		 * 7 private Collection<OutRefs> outrefs;
 		 * 
          */
+        
         for (Entry<String, JsonElement> entry : objects) {
             JsonElement jsonElement  = entry.getValue();
             /*
@@ -61,7 +66,7 @@ public class FunctionGraphDeserializer implements JsonDeserializer<FunctionGraph
             p.setBlockrefs(new ArrayList<>());
             p.setBlocks(new ArrayList<>());
             p.setInrefs(new ArrayList<>());
-            p.setOutref(new ArrayList<>());
+            p.setOutrefs(new ArrayList<>());
             
             /**
              * ToDo: Do this stuff with exceptions, really ugly workaround
@@ -150,8 +155,58 @@ public class FunctionGraphDeserializer implements JsonDeserializer<FunctionGraph
             		}
             	}
             	
+            	//NEW 5.1 FunctionMetaData:
+            	FunctionMetaData metadata = new FunctionMetaData();
+            	
+            	JsonElement jsomElemMetaData = eachPage.get("metadata");
+            	JsonObject jsonMetadata = jsomElemMetaData.getAsJsonObject();
+            	
+            	try {
+            		metadata.setBinweight(jsonMetadata.get("binweight").getAsDouble());
+            	} catch(java.lang.UnsupportedOperationException e) {
+            		metadata.setBinweight(0.0);
+            	}
+            	
+            	try {
+            		metadata.setCharacteristics(jsonMetadata.get("characteristics").getAsString());
+            	} catch (java.lang.UnsupportedOperationException e) {
+            		metadata.setCharacteristics("");
+            	}
+            	
+            	try {
+            		metadata.setConfidence(jsonMetadata.get("confidence").getAsDouble());
+            	} catch(java.lang.UnsupportedOperationException e) {
+            		metadata.setConfidence(0.0);
+            	}
+            	
+            	try {
+            		metadata.setFunction_name(jsonMetadata.get("function_name").getAsString());
+            	} catch(java.lang.UnsupportedOperationException e) {
+            		metadata.setFunction_name("");
+            	}
+            	
+            	try {
+            		metadata.setPic_hash(jsonMetadata.get("pic_hash").getAsString());
+            	} catch(java.lang.UnsupportedOperationException e) {
+            		metadata.setPic_hash("");
+            	}
+            	
+            	/* TODO: get strongly_connected_components as whatever it might be. */
+            	metadata.setStrongly_connected_components(null);
+            	
+            	try {
+            		metadata.setTfidf(jsonMetadata.get("tfidf").getAsFloat());
+            	} catch(java.lang.UnsupportedOperationException e) {
+            		metadata.setTfidf(0.0f);
+            	}
+            	
+            	p.setMetadata(metadata);
+            	
+            	//5.1 metadata done
+            	
+            	
             	// add (6) offset
-            	p.setOffsets(eachPage.get("offset").getAsLong());
+            	p.setOffset(eachPage.get("offset").getAsLong());
             	
             	// parse (7) outref
             	JsonElement jsonElemOutRefs = eachPage.get("outrefs");
@@ -167,7 +222,7 @@ public class FunctionGraphDeserializer implements JsonDeserializer<FunctionGraph
                     		for(int i = 0; i<refs.size(); i++)
                     		outref.getOutrefs().add(refs.get(i).getAsLong());
             			}
-            			p.getOutref().add(outref);
+            			p.getOutrefs().add(outref);
             		}
             	}
             }

@@ -24,10 +24,11 @@ public class NgramGenerator {
 	public List<Ngram> createWithoutOverlappingCodeCaves(Linearization linearizedDisassembly, int n) {
 		ArrayList<Ngram> allNgrams = new ArrayList<>(linearizedDisassembly.getLinearization().size());
 		long begin = linearizedDisassembly.getSortedSMDA().getBase_addr();
-		if(begin < 0x100000) {
-			begin = begin + 0x100000;
-		}
-		long end = begin + linearizedDisassembly.getSortedSMDA().getBuffer_size();
+		//old workaround, remove when verified.
+		//if(begin < 0x100000) {
+		//	begin = begin + 0x100000;
+		//}
+		long end = begin + linearizedDisassembly.getSortedSMDA().getBinary_size();
 		
 		for(List<Instruction> instructionList : linearizedDisassembly.getLinearization()) {
 			

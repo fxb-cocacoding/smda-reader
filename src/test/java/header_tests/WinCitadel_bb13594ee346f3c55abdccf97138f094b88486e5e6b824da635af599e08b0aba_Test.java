@@ -9,6 +9,7 @@ import org.junit.Test;
 
 import smtx_handler.Block;
 import smtx_handler.Function;
+import smtx_handler.Meta;
 import smtx_handler.SMDA;
 
 public class WinCitadel_bb13594ee346f3c55abdccf97138f094b88486e5e6b824da635af599e08b0aba_Test {
@@ -26,14 +27,14 @@ public class WinCitadel_bb13594ee346f3c55abdccf97138f094b88486e5e6b824da635af599
 	
 	final static String filename = "src/test/resources/smda_samples/win.citadel/bb13594ee346f3c55abdccf97138f094b88486e5e6b824da635af599e08b0aba_dump_0x00140000.smda";
 	final static long num_api_calls = 0,
-					  num_basic_blocks = 13718,
-					  num_disassembly_failed_functions = 14,
+					  num_basic_blocks = 13551,
+					  num_disassembly_failed_functions = 31,
 					  num_disassembly_failed_instructions = 0,
-					  num_function_calls = 5348,
-					  num_functions = 998,
-					  num_instructions = 65302,
-					  num_leaf_functions = 142,
-					  num_recursive_functions = 10;
+					  num_function_calls = 5306,
+					  num_functions = 1006,
+					  num_instructions = 64826,
+					  num_leaf_functions = 147,
+					  num_recursive_functions = 9;
 
 
 	SMDA smda = null;
@@ -50,12 +51,19 @@ public class WinCitadel_bb13594ee346f3c55abdccf97138f094b88486e5e6b824da635af599
 	}
 	
 	@Test
+	public void testMetaData() {
+		Meta meta = smda.getMetadata();
+		assertEquals("win.citadel", meta.getFamily());
+		assertEquals("bb13594ee346f3c55abdccf97138f094b88486e5e6b824da635af599e08b0aba_dump_0x00140000", meta.getFilename());
+	}
+	
+	@Test
 	public void testCitadelNumApiCalls() {
 		all = 0;
 		for(Function a : smda.getXcfg().getFunctions()) {
 			all += a.getApirefs().size();
 		}
-		assertEquals(num_api_calls, smda.getSummary().getNum_api_calls());
+		assertEquals(num_api_calls, smda.getStatistics().getNum_api_calls());
 		assertEquals(num_api_calls, all);
 	}
 	
@@ -65,7 +73,7 @@ public class WinCitadel_bb13594ee346f3c55abdccf97138f094b88486e5e6b824da635af599
 		for(Function a : smda.getXcfg().getFunctions()) {
 			all += a.getBlocks().size();
 		}
-		assertEquals(num_basic_blocks, smda.getSummary().getNum_basic_blocks());
+		assertEquals(num_basic_blocks, smda.getStatistics().getNum_basic_blocks());
 		assertEquals(num_basic_blocks, all);
 	}
 	
@@ -75,7 +83,7 @@ public class WinCitadel_bb13594ee346f3c55abdccf97138f094b88486e5e6b824da635af599
 		for(Function a : smda.getXcfg().getFunctions()) {
 			all += a.getInrefs().size();
 		}
-		assertEquals(num_function_calls, smda.getSummary().getNum_function_calls());
+		assertEquals(num_function_calls, smda.getStatistics().getNum_function_calls());
 		assertEquals(num_function_calls, all);
 	}
 	
@@ -94,7 +102,7 @@ public class WinCitadel_bb13594ee346f3c55abdccf97138f094b88486e5e6b824da635af599
 				all += blocks.getInstructions().size();
 			}
 		}
-		assertEquals(num_instructions, smda.getSummary().getNum_instructions());
+		assertEquals(num_instructions, smda.getStatistics().getNum_instructions());
 		assertEquals(num_instructions, all);
 	}
 }

@@ -27,13 +27,13 @@ public class WinCitadel_d147e69bd47cd504ca555fcad15081ac5bd79b584794a93d5b250eb7
 	
 	final static String filename = "src/test/resources/smda_samples/win.citadel/d147e69bd47cd504ca555fcad15081ac5bd79b584794a93d5b250eb73d05b186_dump_0x02390000.smda";
 	final static long	num_api_calls = 0,
-	  					num_basic_blocks = 9243,
-	  					num_disassembly_failed_functions = 19,
+	  					num_basic_blocks = 9254,
+	  					num_disassembly_failed_functions = 31,
 	  					num_disassembly_failed_instructions = 0,
-	  					num_function_calls = 3414,
-	  					num_functions = 780,
-	  					num_instructions = 46305,
-	  					num_leaf_functions = 102,
+	  					num_function_calls = 3411,
+	  					num_functions = 786,
+	  					num_instructions = 46346,
+	  					num_leaf_functions = 105,
 	  					num_recursive_functions = 6;
 	
 	SMDA smda = null;
@@ -55,7 +55,7 @@ public class WinCitadel_d147e69bd47cd504ca555fcad15081ac5bd79b584794a93d5b250eb7
 		for(Function a : smda.getXcfg().getFunctions()) {
 			all += a.getApirefs().size();
 		}
-		assertEquals(num_api_calls, smda.getSummary().getNum_api_calls());
+		assertEquals(num_api_calls, smda.getStatistics().getNum_api_calls());
 		assertEquals(num_api_calls, all);
 	}
 	
@@ -65,7 +65,7 @@ public class WinCitadel_d147e69bd47cd504ca555fcad15081ac5bd79b584794a93d5b250eb7
 		for(Function a : smda.getXcfg().getFunctions()) {
 			all += a.getBlocks().size();
 		}
-		assertEquals(num_basic_blocks, smda.getSummary().getNum_basic_blocks());
+		assertEquals(num_basic_blocks, smda.getStatistics().getNum_basic_blocks());
 		assertEquals(num_basic_blocks, all);
 	}
 	
@@ -75,7 +75,7 @@ public class WinCitadel_d147e69bd47cd504ca555fcad15081ac5bd79b584794a93d5b250eb7
 		for(Function a : smda.getXcfg().getFunctions()) {
 			all += a.getInrefs().size();
 		}
-		assertEquals(num_function_calls, smda.getSummary().getNum_function_calls());
+		assertEquals(num_function_calls, smda.getStatistics().getNum_function_calls());
 		assertEquals(num_function_calls, all);
 	}
 	
@@ -94,7 +94,7 @@ public class WinCitadel_d147e69bd47cd504ca555fcad15081ac5bd79b584794a93d5b250eb7
 				all += blocks.getInstructions().size();
 			}
 		}
-		assertEquals(num_instructions, smda.getSummary().getNum_instructions());
+		assertEquals(num_instructions, smda.getStatistics().getNum_instructions());
 		assertEquals(num_instructions, all);
 	}
 }
