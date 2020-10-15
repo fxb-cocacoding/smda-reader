@@ -10,7 +10,7 @@ public class FunctionMetaData {
 	private double confidence;
 	private String function_name;
 	
-	private String pic_hash;
+	private Long pic_hash;
 	
 	/* Currently not supported and ALWAYS NULL */
 	@Nullable
@@ -43,10 +43,10 @@ public class FunctionMetaData {
 	public void setFunction_name(String function_name) {
 		this.function_name = function_name;
 	}
-	public String getPic_hash() {
+	public Long getPic_hash() {
 		return pic_hash;
 	}
-	public void setPic_hash(String pic_hash) {
+	public void setPic_hash(Long pic_hash) {
 		this.pic_hash = pic_hash;
 	}
 	public String getStrongly_connected_components() {
@@ -94,7 +94,7 @@ public class FunctionMetaData {
 	@Override
 	public String toString() {
 		return "FunctionMetaData [binweight=" + binweight + ", characteristics=" + characteristics + ", confidence="
-				+ confidence + ", function_name=" + function_name + ", pic_hash=" + pic_hash
+				+ confidence + ", function_name=" + function_name + ", pic_hash=" + Long.toUnsignedString(pic_hash)
 				+ ", strongly_connected_components=" + strongly_connected_components + ", tfidf=" + tfidf + "]";
 	}
 	

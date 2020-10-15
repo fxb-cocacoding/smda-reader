@@ -6,6 +6,7 @@ import java.io.FileReader;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonSyntaxException;
 
 import smtx_handler.CodeAreas;
 import smtx_handler.CodeAreasDeserializer;
@@ -45,11 +46,7 @@ public class Generator {
 	    
 	    try {
 	    	smda = gson.fromJson(br, SMDA.class);
-	    } catch(Exception e) {
-	    	System.err.println("Exception for " + filename);
-	    	System.err.println("LocalMessage: \n" + e.getLocalizedMessage());
-	    	System.err.println("Message: \n" + e.getMessage());
-	    	System.err.println("String: \n" + e.toString());
+	    } catch(JsonSyntaxException e) {
 	    	e.printStackTrace();
 	    }
 	    

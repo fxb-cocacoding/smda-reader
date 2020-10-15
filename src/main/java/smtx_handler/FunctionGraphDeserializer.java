@@ -186,9 +186,9 @@ public class FunctionGraphDeserializer implements JsonDeserializer<FunctionGraph
             	}
             	
             	try {
-            		metadata.setPic_hash(jsonMetadata.get("pic_hash").getAsString());
+            		metadata.setPic_hash(jsonMetadata.get("pic_hash").getAsLong());
             	} catch(java.lang.UnsupportedOperationException e) {
-            		metadata.setPic_hash("");
+            		metadata.setPic_hash(0L);
             	}
             	
             	/* TODO: get strongly_connected_components as whatever it might be. */
